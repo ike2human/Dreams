@@ -1,217 +1,15 @@
 import React, { useState } from 'react';
 import { useRouter } from './Router';
 import { Search, Filter, MapPin, Calendar, Gauge, Fuel, Users, Heart, Eye, Phone, Mail, Star, ChevronDown, Menu, X, Car, Globe, Shield, Award } from 'lucide-react';
+import { allCars, getFilteredCars } from '../data/cars';
 
 const HomePage: React.FC = () => {
   const { navigateTo } = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('search');
-  const [searchFilters, setSearchFilters] = useState({
-    make: '',
-    model: '',
-    priceMin: '',
-    priceMax: '',
-    yearMin: '',
-    yearMax: '',
-    mileageMax: '',
-    fuelType: '',
-    transmission: '',
-    location: '',
-    bodyType: '',
-    color: '',
-    driveType: '',
-    engineSize: '',
-    doors: '',
-    seats: ''
-  });
-
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const featuredCars = [
-    {
-      id: '988025062500208369008',
-      make: 'Toyota',
-      model: 'Land Cruiser 250',
-      grade: 'VX',
-      year: 2019,
-      price: 6800000,
-      mileage: 42000,
-      fuel: 'Gasoline',
-      transmission: 'AT',
-      location: 'Tokyo',
-      image: '/images/98802504250020836900300 copy.jpg',
-      rating: 4.8,
-      views: 2847,
-      isFavorite: false,
-      bodyType: 'SUV',
-      drivetrain: '4WD',
-      engine: '4.6L V8',
-      doors: 5,
-      seats: 8,
-      color: 'Pearl White',
-      dealer: 'Premium Auto Tokyo',
-      condition: 'Excellent'
-    },
-    {
-      id: 1,
-      make: 'Toyota',
-      model: 'Crown RS',
-      year: 2020,
-      price: 3200000,
-      mileage: 9939,
-      fuel: 'Gasoline',
-      transmission: 'AT',
-      location: 'Tokyo',
-      image: '/images/0560809A20250613G00418.jpg',
-      rating: 4.8,
-      views: 1250,
-      isFavorite: false,
-      bodyType: 'Sedan',
-      drivetrain: '2WD',
-      engine: '2.0L',
-      doors: 4,
-      seats: 5,
-      color: 'White',
-      dealer: 'Tokyo Auto Center',
-      condition: 'Excellent',
-      chassisNumber: 'ARS220-100****',
-      features: ['Driver Seat Airbag', 'Passenger Seat Airbag', 'Side Airbag']
-    },
-    {
-      id: 2,
-      make: 'Land Rover',
-      model: 'Range Rover Vogue',
-      year: 2019,
-      price: 2800000,
-      mileage: 32000,
-      fuel: 'Gasoline',
-      transmission: 'AT',
-     drivetrain: '4WD',
-     engine: '3.0L V6 Turbo',
-     doors: 5,
-     seats: 5,
-     color: 'Black',
-     interiorColor: 'Leather',
-     bodyType: 'SUV',
-     condition: 'Excellent',
-      location: 'Osaka',
-      image: '/images/RR1.jpg',
-      rating: 4.6,
-      views: 980,
-     isFavorite: true,
-     dealer: 'Osaka Luxury Motors',
-     features: [
-       'Driver Seat Airbag', 'Passenger Seat Airbag', 'Side Airbag',
-       'Sun/Moon Roof', 'ABS', 'Air Conditioner', 'Double Air-conditioner',
-       'Downhill Assist Control', 'Power Steering', 'Power Window',
-       'Anti-theft Device', 'Idling Stop', 'USB Input Terminal',
-       'Bluetooth Connection', 'TV & Navigation', 'Memory Navi',
-       'TV (full segment)', 'Music Player Connectable', 'CD Changer',
-       'Music Server', 'DVD Playback', 'Alloy Wheel 24 inch',
-       'Leather Seat', 'Half Leather Seat', 'Keyless', 'LED Headlamp',
-       'HID (xenon light)', 'Back Camera', 'ETC', 'Aero', 'Smart Key',
-       'Power Seats', 'Full Flat Sheet', 'Seat Heater',
-       'Electric Rear Gate', 'Front Camera', 'Seat Air Conditioner',
-       'All-around Camera', 'Side Camera', 'Air Suspension',
-       'Headlight Washer', 'ESC (Electronic Stability Control)',
-       'Collision Damage Reduction System', 'Clearance Sonar', 'Auto Light'
-     ]
-    },
-    {
-      id: 3,
-      make: 'Mercedes Benz',
-      model: 'C-Class C220d Laureus Edition Sports Plus Package',
-      year: 2020,
-      price: 4200000,
-      mileage: 25000,
-      fuel: 'Gasoline',
-      transmission: 'AT',
-      location: 'Tokyo',
-      image: '/images/98802507260020677100200.jpg',
-      rating: 4.7,
-      views: 756,
-      isFavorite: false,
-      bodyType: 'Sedan',
-      drivetrain: '2WD',
-      engine: '2.0L Turbo Diesel',
-      doors: 4,
-      seats: 5,
-      color: 'Black',
-      dealer: 'Mercedes Tokyo Premium',
-      condition: 'Excellent'
-    },
-    {
-      id: 4,
-      make: 'Lexus',
-      model: 'RX RX300 F Sport',
-      year: 2021,
-      price: 4800000,
-      mileage: 22000,
-      fuel: 'Gasoline',
-      transmission: 'AT',
-      location: 'Tokyo',
-      image: '/images/0207973A20250528D00223.jpg',
-      rating: 4.9,
-      views: 1420,
-      isFavorite: false,
-      bodyType: 'SUV',
-      drivetrain: 'AWD',
-      engine: '2.0L Turbo',
-      doors: 5,
-      seats: 5,
-      color: 'White',
-      dealer: 'Lexus Tokyo Premium',
-      condition: 'Excellent'
-    },
-    {
-      id: 5,
-      make: 'BMW',
-      model: 'X7 M50i',
-      year: 2021,
-      price: 8500000,
-      mileage: 28000,
-      fuel: 'Gasoline',
-      transmission: 'AT',
-      location: 'Tokyo',
-      image: '/images/bmw70097002633025072700300.jpg',
-      rating: 4.7,
-      views: 1650,
-      isFavorite: false,
-      bodyType: 'SUV',
-      drivetrain: 'AWD',
-      engine: '4.4L V8 Twin Turbo',
-      doors: 5,
-      seats: 7,
-      color: 'Black',
-      dealer: 'BMW Tokyo Premium',
-      condition: 'Excellent'
-    },
-    {
-      id: 6,
-      make: 'Land Rover',
-      model: 'Defender 110S D350',
-      year: 2021,
-      price: 7200000,
-      mileage: 18000,
-      fuel: 'Diesel',
-      transmission: 'AT',
-      location: 'Tokyo',
-      image: '/images/9730027A30250804W00103.jpg',
-      rating: 4.7,
-      views: 1850,
-      isFavorite: false,
-      bodyType: 'SUV',
-      drivetrain: '4WD',
-      engine: '3.0L V6 Diesel',
-      doors: 5,
-      seats: 7,
-      color: 'Black',
-      dealer: 'Land Rover Tokyo Premium',
-      condition: 'Excellent'
-    }
-  ];
+  // Get filtered cars based on search criteria
+  const filteredCars = getFilteredCars(searchFilters);
+  const displayCars = filteredCars.length > 0 ? filteredCars : allCars.slice(0, 6); // Show first 6 if no filters applied
 
   const popularMakes = [
     { name: 'Mercedes', count: 8420, logo: '🏎️' },
@@ -601,7 +399,7 @@ const HomePage: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredCars.map((car) => (
+            {displayCars.map((car) => (
               <div key={car.id} className="bg-gray-800/50 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-700 hover:border-gray-600">
                 <div className="relative">
                   <img 
@@ -655,12 +453,14 @@ const HomePage: React.FC = () => {
                   </div>
                   
                   <div className="flex space-x-2">
-                    <button 
-                      onClick={() => navigateTo('car-detail')}
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-md font-medium transition-all duration-200"
+                    <a 
+                      href={`/car-detail/${car.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-md font-medium transition-all duration-200 text-center inline-block"
                     >
                       View Details
-                    </button>
+                    </a>
                     <button className="px-4 py-2 border border-gray-600 text-gray-300 rounded-md hover:bg-gray-700 transition-colors">
                       <Phone className="w-4 h-4" />
                     </button>
