@@ -3,7 +3,7 @@ import { useRouter } from './Router';
 import { getCarById, Car } from '../data/cars';
 import { 
   ArrowLeft, Heart, Share2, Phone, Mail, MapPin, Calendar, Gauge, 
-  Fuel, Users, Settings, Car, Shield, Award, CheckCircle, AlertTriangle,
+  Fuel, Users, Settings, Car as CarIcon, Shield, Award, CheckCircle, AlertTriangle,
   Camera, Play, ZoomIn, ChevronLeft, ChevronRight, Star, Clock,
   FileText, Wrench, Eye, Download, ExternalLink
 } from 'lucide-react';
