@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from './Router';
-import { getCarById } from '../data/cars';
+import { getCarById, Car } from '../data/cars';
 import { 
   ArrowLeft, Heart, Share2, Phone, Mail, MapPin, Calendar, Gauge, 
   Fuel, Users, Settings, Car, Shield, Award, CheckCircle, AlertTriangle,
@@ -52,11 +52,13 @@ const CarDetail: React.FC<CarDetailProps> = ({ carId }) => {
   };
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % carData.images.length);
+    const images = carData.images || [carData.image];
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + carData.images.length) % carData.images.length);
+    const images = carData.images || [carData.image];
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   const getConditionColor = (score: number) => {

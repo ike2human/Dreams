@@ -354,18 +354,18 @@ export const getCarById = (id: string): Car | undefined => {
 
 export const getFilteredCars = (filters: any): Car[] => {
   return allCars.filter(car => {
-    if (filters.make && car.make.toLowerCase() !== filters.make.toLowerCase()) return false;
-    if (filters.model && car.model.toLowerCase() !== filters.model.toLowerCase()) return false;
+    if (filters.make && !car.make.toLowerCase().includes(filters.make.toLowerCase())) return false;
+    if (filters.model && !car.model.toLowerCase().includes(filters.model.toLowerCase())) return false;
     if (filters.priceMin && car.price < parseInt(filters.priceMin)) return false;
     if (filters.priceMax && car.price > parseInt(filters.priceMax)) return false;
     if (filters.yearMin && car.year < parseInt(filters.yearMin)) return false;
     if (filters.yearMax && car.year > parseInt(filters.yearMax)) return false;
     if (filters.mileageMax && car.mileage > parseInt(filters.mileageMax)) return false;
-    if (filters.fuelType && car.fuel.toLowerCase() !== filters.fuelType.toLowerCase()) return false;
-    if (filters.transmission && car.transmission.toLowerCase() !== filters.transmission.toLowerCase()) return false;
-    if (filters.location && car.location.toLowerCase() !== filters.location.toLowerCase()) return false;
-    if (filters.bodyType && car.bodyType.toLowerCase() !== filters.bodyType.toLowerCase()) return false;
-    if (filters.color && car.color.toLowerCase() !== filters.color.toLowerCase()) return false;
+    if (filters.fuelType && !car.fuel.toLowerCase().includes(filters.fuelType.toLowerCase())) return false;
+    if (filters.transmission && !car.transmission.toLowerCase().includes(filters.transmission.toLowerCase())) return false;
+    if (filters.location && !car.location.toLowerCase().includes(filters.location.toLowerCase())) return false;
+    if (filters.bodyType && !car.bodyType.toLowerCase().includes(filters.bodyType.toLowerCase())) return false;
+    if (filters.color && !car.color.toLowerCase().includes(filters.color.toLowerCase())) return false;
     return true;
   });
 };

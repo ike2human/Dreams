@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { useRouter } from './Router';
 import { Search, Filter, MapPin, Calendar, Gauge, Fuel, Users, Heart, Eye, Phone, Mail, Star, ChevronDown, Menu, X, Car, Globe, Shield, Award } from 'lucide-react';
-import { allCars, getFilteredCars } from '../data/cars';
+import { allCars, getFilteredCars, Car } from '../data/cars';
 
 const HomePage: React.FC = () => {
   const { navigateTo } = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('search');
+  const [searchFilters, setSearchFilters] = useState({
+    make: '', model: '', priceMin: '', priceMax: '', yearMin: '', yearMax: '',
+    mileageMax: '', fuelType: '', transmission: '', location: '', bodyType: '',
+    color: '', driveType: '', engineSize: '', doors: '', seats: ''
+  });
+
   // Get filtered cars based on search criteria
   const filteredCars = getFilteredCars(searchFilters);
   const displayCars = filteredCars.length > 0 ? filteredCars : allCars.slice(0, 6); // Show first 6 if no filters applied
@@ -30,6 +36,10 @@ const HomePage: React.FC = () => {
 
   const formatMileage = (mileage: number) => {
     return new Intl.NumberFormat('ja-JP').format(mileage) + ' km';
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
