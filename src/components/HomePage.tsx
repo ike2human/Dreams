@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from './Router';
 import { Search, Filter, MapPin, Calendar, Gauge, Fuel, Users, Heart, Eye, Phone, Mail, Star, ChevronDown, Menu, X, Car, Globe, Shield, Award } from 'lucide-react';
-import { allCars, getFilteredCars, Car } from '../data/cars';
+import { allCars, getFilteredCars, Car as CarType } from '../data/cars';
 
 const HomePage: React.FC = () => {
   const { navigateTo } = useRouter();
@@ -15,7 +15,7 @@ const HomePage: React.FC = () => {
 
   // Get filtered cars based on search criteria
   const filteredCars = getFilteredCars(searchFilters);
-  const displayCars = filteredCars.length > 0 ? filteredCars : allCars.slice(0, 6); // Show first 6 if no filters applied
+  const displayCars: CarType[] = filteredCars.length > 0 ? filteredCars : allCars.slice(0, 6); // Show first 6 if no filters applied
 
   const popularMakes = [
     { name: 'Mercedes', count: 8420, logo: '🏎️' },
