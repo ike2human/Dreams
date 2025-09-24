@@ -463,14 +463,12 @@ const HomePage: React.FC = () => {
                   </div>
                   
                   <div className="flex space-x-2">
-                    <a 
-                      href={`/car-detail/${car.id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-md font-medium transition-all duration-200 text-center inline-block"
+                    <button
+                      onClick={() => navigateTo('car-detail', { id: car.id })}
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-md font-medium transition-all duration-200 text-center"
                     >
                       View Details
-                    </a>
+                    </button>
                     <button className="px-4 py-2 border border-gray-600 text-gray-300 rounded-md hover:bg-gray-700 transition-colors">
                       <Phone className="w-4 h-4" />
                     </button>
