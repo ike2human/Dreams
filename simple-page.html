@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page with Main Element</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        
+        section {
+            margin: 2rem 0;
+        }
+        
+        .highlight {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-left: 4px solid #3498db;
+            margin: 1rem 0;
+        }
+        
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Website</h1>
+        <p>A simple page demonstrating the main element</p>
+    </header>
+
+    <main>
+        <h1>Main Content Area</h1>
+        
+        <section>
+            <h2>About This Page</h2>
+            <p>This page demonstrates the proper use of the HTML5 <code>&lt;main&gt;</code> element. The main element represents the dominant content of the document body.</p>
+            
+            <div class="highlight">
+                <strong>Key Points:</strong>
+                <ul>
+                    <li>The main element should contain the primary content of the page</li>
+                    <li>There should only be one main element per page</li>
+                    <li>It should not be nested inside other semantic elements like article, aside, footer, header, or nav</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Content Section</h2>
+            <p>This is the main content area where you would typically place your primary page content. This could include articles, blog posts, product information, or any other central content.</p>
+            
+            <p>The main element helps screen readers and other assistive technologies identify the primary content area, improving accessibility for users with disabilities.</p>
+        </section>
+
+        <section>
+            <h2>Additional Information</h2>
+            <p>You can include multiple sections within the main element to organize your content logically. Each section can have its own heading and content.</p>
+            
+            <div class="highlight">
+                <p><strong>Semantic HTML Benefits:</strong></p>
+                <p>Using semantic elements like main, section, header, and footer makes your HTML more meaningful and accessible to both users and search engines.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
